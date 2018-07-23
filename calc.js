@@ -13,8 +13,8 @@ console.log("hello world");
 console.log(buttons[0].innerTEXT);
 
 function calculator(){
-  var value = //keypress;
-  if (value !=== NaN || value === "."){
+  var value = keypress;
+  if (value === !NaN || value === "."){
     temp += value;
     document.getElementById("display").innerHTML = temp;
   } else if (val === "AC"){
@@ -32,6 +32,10 @@ function calculator(){
   } else if (val === "/"){
     inputs.push(temp);
     inputs.push("/");
+    temp = '';
+  } else if (val === "+" || val === "-" || val === "%"){
+    inputs.push(temp);
+    inputs.push(val);
     temp = '';
   //calculation step if = input pressed
   } else if (val === "="){
@@ -52,8 +56,12 @@ function calculator(){
       }
       i++
     }
+    /*negative result parsing
     if (nt < 0) {
-      
+      */
+    document.getElementById("display").innerHTML = nt;
+    inputs = [];
+    temp = "";
     }
-  }
 }
+
