@@ -56,9 +56,8 @@ function calculator(value){
     /*negative result parsing
     if (nt < 0) {
       */
+    //Display Result
     document.getElementById("display").value = nt;
-    inputs = [];
-    temp = "";
     }
 }
 
