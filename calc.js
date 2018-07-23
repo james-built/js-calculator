@@ -1,57 +1,54 @@
+//Global Variables
 var inputs=[];
 var total=0;
-
 var temp= '';
-var buttons = document.getElementsByTagName("button");
-console.log(buttons);
-/*for (let i = 0; i < buttons.length; i++){
-buttons[i].addEventListener("click", function (){
-console.log("hello world");
-})
-}
-*/
-console.log(buttons[0].innerTEXT);
 
-function calculator(){
-  var value = keypress;
-  if (value === !NaN || value === "."){
+//Global Click Listener
+document.addEventListener("click",buttonPress);
+function buttonPress(event){
+  var value = event.target.innerHTML;
+  calculator(value);
+}
+
+function calculator(value){
+  if (!isNaN(value) || value === "."){
     temp += value;
-    document.getElementById("display").innerHTML = temp;
-  } else if (val === "AC"){
+    document.getElementById("display").value = temp;
+  } else if (value === "AC"){
     temp = '';
     inputs = [];
     total = 0;
-    document.getElementById("display").innerHTML = '';
-  } else if (val === "CE"){
+    document.getElementById("display").value = '';
+  } else if (value === "CE"){
     temp = '';
-    document.getElementById("display").innerHTML = '';
-  } else if (val === "X"){
+    document.getElementById("display").value = '';
+  } else if (value === "X"){
     inputs.push(temp);
     inputs.push('*');
     temp = '';
-  } else if (val === "/"){
+  } else if (value === "/"){
     inputs.push(temp);
     inputs.push("/");
     temp = '';
-  } else if (val === "+" || val === "-" || val === "%"){
+  } else if (value === "+" || value === "-" || value === "%"){
     inputs.push(temp);
-    inputs.push(val);
+    inputs.push(value);
     temp = '';
   //calculation step if = input pressed
-  } else if (val === "="){
+  } else if (value === "="){
     inputs.push(temp);
     //store initial number for calculation
-    var nt = Number(entries[0]);
-    for (let i = 1; i < entries.length; i++){
-      var operand = entries[i];
-      var nextNum = Number(entries[i+1]);
-      if (operand === "*") {
+    var nt = Number(inputs[0]);
+    for (let i = 1; i < inputs.length; i++){
+      var operator = inputs[i];
+      var nextNum = Number(inputs[i+1]);
+      if (operator === "*") {
         nt *= nextNum;
-      } else if (operand === "/"){
+      } else if (operator === "/"){
         nt /= nextNum;
-      } else if (operand === "+"){
+      } else if (operator === "+"){
         nt += nextNum;
-      } else if (operand === "-"){
+      } else if (operator === "-"){
         nt -= nextNum;
       }
       i++
@@ -59,7 +56,7 @@ function calculator(){
     /*negative result parsing
     if (nt < 0) {
       */
-    document.getElementById("display").innerHTML = nt;
+    document.getElementById("display").value = nt;
     inputs = [];
     temp = "";
     }
