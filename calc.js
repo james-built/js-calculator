@@ -1,7 +1,8 @@
 //Global Variables
-var inputs=[];
-var total=0;
-var temp= '';
+var inputs = [];
+var total = 0;
+var temp = '';
+var result = 0;
 
 
 //Global Click Listener
@@ -16,38 +17,49 @@ function calculator(value){
     temp += value;
     document.getElementById("display").value = temp;
   } else if (value === "0" && temp != "0" && temp != ""){
-    temp += value;
-    document.getElementById("display").value = temp;
+      temp += value;
+      document.getElementById("display").value = temp;
   } else if (value === "." && temp.slice(-1) != "."){
-    temp += value;
-    document.getElementById("display").value = temp;
+      temp += value;
+      document.getElementById("display").value = temp;
   } else if (value === "AC"){
-    temp = '';
-    inputs = [];
-    total = 0;
-    document.getElementById("display").value = 0;
+      temp = '';
+      inputs = [];
+      total = 0;
+      document.getElementById("display").value = 0;
   } else if (value === "CE"){
-    temp = '';
-    document.getElementById("display").value = '';
+      temp = '';
+      document.getElementById("display").value = '';
   } else if (value === "X"){
-    inputs.push(temp);
-    inputs.push('*');
-    temp = '';
+      if (temp === ''){
+        inputs.push(result);
+        inputs.push('*');
+      } else {
+        inputs.push(temp);
+        inputs.push('*');
+        temp = '';
+      }
   } else if (value === "/"){
-    inputs.push(temp);
-    inputs.push("/");
-    temp = '';
+      if (temp === ''){
+        inputs.push(result);
+        inputs.push('/');
+      } else {
+        inputs.push(temp);
+        inputs.push('/');
+        temp = '';
+      }
   } else if (value === "+" || value === "-" || value === "%"){
-    if (temp = ''){
-      inputs.push(nt);
-    } else {
-    inputs.push(temp);
-    inputs.push(value);
-    temp = '';
-    }
+      if (temp === ''){
+        inputs.push(result);
+        inputs.push(value);
+      } else {
+        inputs.push(temp);
+        inputs.push(value);
+        temp = '';
+      }
   //calculation step if = input pressed
   } else if (value === "="){
-    inputs.push(temp);
+      inputs.push(temp);
     //store initial number for calculation
     var nt = Number(inputs[0]);
     for (let i = 1; i < inputs.length; i++){
@@ -56,11 +68,11 @@ function calculator(value){
       if (operator === "*") {
         nt *= nextNum;
       } else if (operator === "/"){
-        nt /= nextNum;
+          nt /= nextNum;
       } else if (operator === "+"){
-        nt += nextNum;
+          nt += nextNum;
       } else if (operator === "-"){
-        nt -= nextNum;
+          nt -= nextNum;
       }
       i++
     }
@@ -70,6 +82,9 @@ function calculator(value){
     //Display Result
     document.getElementById("display").value = Number((nt).toFixed(5));
     temp = '';
+    result = nt;
+    inputs = [];
+
     }
 }
 
