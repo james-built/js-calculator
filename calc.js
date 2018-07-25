@@ -3,6 +3,7 @@ var inputs=[];
 var total=0;
 var temp= '';
 
+
 //Global Click Listener
 document.addEventListener("click",buttonPress);
 function buttonPress(event){
@@ -11,14 +12,20 @@ function buttonPress(event){
 }
 
 function calculator(value){
-  if (!isNaN(value) || value === "."){
+  if (!isNaN(value) && value != 0){
+    temp += value;
+    document.getElementById("display").value = temp;
+  } else if (value === "0" && temp != "0" && temp != ""){
+    temp += value;
+    document.getElementById("display").value = temp;
+  } else if (value === "." && temp.slice(-1) != "."){
     temp += value;
     document.getElementById("display").value = temp;
   } else if (value === "AC"){
     temp = '';
     inputs = [];
     total = 0;
-    document.getElementById("display").value = '';
+    document.getElementById("display").value = 0;
   } else if (value === "CE"){
     temp = '';
     document.getElementById("display").value = '';
@@ -31,9 +38,13 @@ function calculator(value){
     inputs.push("/");
     temp = '';
   } else if (value === "+" || value === "-" || value === "%"){
+    if (temp = ''){
+      inputs.push(nt);
+    } else {
     inputs.push(temp);
     inputs.push(value);
     temp = '';
+    }
   //calculation step if = input pressed
   } else if (value === "="){
     inputs.push(temp);
@@ -57,7 +68,8 @@ function calculator(value){
     if (nt < 0) {
       */
     //Display Result
-    document.getElementById("display").value = nt;
+    document.getElementById("display").value = Number((nt).toFixed(5));
+    temp = '';
     }
 }
 
