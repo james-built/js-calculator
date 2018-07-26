@@ -3,13 +3,14 @@ var inputs = [];
 var total = 0;
 var temp = "";
 
-
 //Global Click Listener
 document.addEventListener("click",buttonPress);
 function buttonPress(event){
   var value = event.target.innerHTML;
   calculator(value);
 }
+
+//Reusable Functions
 function storeInput(value){
   temp += value;
   document.getElementById("display").value = temp;
@@ -33,18 +34,18 @@ function calculator(value){
   } else if (value === "." && temp.slice(-1) != "."){
       storeInput(value);
   } else if (value === "AC"){
-      temp = '';
+      temp = "";
       inputs = [];
       total = 0;
       document.getElementById("display").value = 0;
   } else if (value === "CE"){
-      temp = '';
-      document.getElementById("display").value = '';
+      temp = "";
+      document.getElementById("display").value = "";
   } else if (value === "X"){
       let operator = "*";
       operatorInput(operator);
   } else if (value === "/"){
-      let operator = "/";
+      let operator = value;
       operatorInput(operator);
   } else if (value === "+" || value === "-" || value === "%"){
       let operator = value;
@@ -52,27 +53,26 @@ function calculator(value){
   //calculation step if = input pressed
   } else if (value === "="){
       inputs.push(temp);
-    //store initial number for calculation
-    var result = Number(inputs[0]);
-    for (let i = 1; i < inputs.length; i++){
-      var operator = inputs[i];
-      var nextNum = Number(inputs[i+1]);
-      if (operator === "*") {
-        result *= nextNum;
-      } else if (operator === "/"){
-          result /= nextNum;
-      } else if (operator === "+"){
-          result += nextNum;
-      } else if (operator === "-"){
-          result -= nextNum;
+      var result = Number(inputs[0]);
+      for (let i = 1; i < inputs.length; i++){
+        var operator = inputs[i];
+        var nextNum = Number(inputs[i+1]);
+        if (operator === "*") {
+          result *= nextNum;
+        } else if (operator === "/"){
+            result /= nextNum;
+        } else if (operator === "+"){
+            result += nextNum;
+        } else if (operator === "-"){
+            result -= nextNum;
+        }
+        i++
       }
-      i++
-    }
+    //Display result & reset for new calculation
     document.getElementById("display").value = Number((result).toFixed(5));
-    temp = '';
+    temp = "";
     total = result;
     inputs = [];
-
-    }
+  }
 }
 
