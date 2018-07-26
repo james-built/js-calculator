@@ -2,7 +2,6 @@
 var inputs = [];
 var total = 0;
 var temp = '';
-var result = 0;
 
 
 //Global Click Listener
@@ -32,7 +31,7 @@ function calculator(value){
       document.getElementById("display").value = '';
   } else if (value === "X"){
       if (temp === ''){
-        inputs.push(result);
+        inputs.push(total);
         inputs.push('*');
       } else {
         inputs.push(temp);
@@ -41,7 +40,7 @@ function calculator(value){
       }
   } else if (value === "/"){
       if (temp === ''){
-        inputs.push(result);
+        inputs.push(total);
         inputs.push('/');
       } else {
         inputs.push(temp);
@@ -50,7 +49,7 @@ function calculator(value){
       }
   } else if (value === "+" || value === "-" || value === "%"){
       if (temp === ''){
-        inputs.push(result);
+        inputs.push(total);
         inputs.push(value);
       } else {
         inputs.push(temp);
@@ -61,28 +60,24 @@ function calculator(value){
   } else if (value === "="){
       inputs.push(temp);
     //store initial number for calculation
-    var nt = Number(inputs[0]);
+    var result = Number(inputs[0]);
     for (let i = 1; i < inputs.length; i++){
       var operator = inputs[i];
       var nextNum = Number(inputs[i+1]);
       if (operator === "*") {
-        nt *= nextNum;
+        result *= nextNum;
       } else if (operator === "/"){
-          nt /= nextNum;
+          result /= nextNum;
       } else if (operator === "+"){
-          nt += nextNum;
+          result += nextNum;
       } else if (operator === "-"){
-          nt -= nextNum;
+          result -= nextNum;
       }
       i++
     }
-    /*negative result parsing
-    if (nt < 0) {
-      */
-    //Display Result
-    document.getElementById("display").value = Number((nt).toFixed(5));
+    document.getElementById("display").value = Number((result).toFixed(5));
     temp = '';
-    result = nt;
+    total = result;
     inputs = [];
 
     }
