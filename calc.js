@@ -14,6 +14,16 @@ function storeInput(value){
   temp += value;
   document.getElementById("display").value = temp;
 }
+function operatorInput(operator){
+  if (temp === ""){
+    inputs.push(total);
+    inputs.push(operator);
+  } else {
+    inputs.push(temp);
+    inputs.push(operator);
+    temp = "";
+  }
+}
 
 function calculator(value){
   if (!isNaN(value) && value != 0){
@@ -31,32 +41,14 @@ function calculator(value){
       temp = '';
       document.getElementById("display").value = '';
   } else if (value === "X"){
-      if (temp === ''){
-        inputs.push(total);
-        inputs.push('*');
-      } else {
-        inputs.push(temp);
-        inputs.push('*');
-        temp = '';
-      }
+      let operator = "*";
+      operatorInput(operator);
   } else if (value === "/"){
-      if (temp === ''){
-        inputs.push(total);
-        inputs.push('/');
-      } else {
-        inputs.push(temp);
-        inputs.push('/');
-        temp = '';
-      }
+      let operator = "/";
+      operatorInput(operator);
   } else if (value === "+" || value === "-" || value === "%"){
-      if (temp === ''){
-        inputs.push(total);
-        inputs.push(value);
-      } else {
-        inputs.push(temp);
-        inputs.push(value);
-        temp = '';
-      }
+      let operator = value;
+      operatorInput(operator);
   //calculation step if = input pressed
   } else if (value === "="){
       inputs.push(temp);
