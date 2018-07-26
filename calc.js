@@ -1,7 +1,7 @@
 //Global Variables
 var inputs = [];
 var total = 0;
-var temp = '';
+var temp = "";
 
 
 //Global Click Listener
@@ -10,17 +10,18 @@ function buttonPress(event){
   var value = event.target.innerHTML;
   calculator(value);
 }
+function storeInput(value){
+  temp += value;
+  document.getElementById("display").value = temp;
+}
 
 function calculator(value){
   if (!isNaN(value) && value != 0){
-    temp += value;
-    document.getElementById("display").value = temp;
+    storeInput(value);
   } else if (value === "0" && temp != "0" && temp != ""){
-      temp += value;
-      document.getElementById("display").value = temp;
+      storeInput(value);
   } else if (value === "." && temp.slice(-1) != "."){
-      temp += value;
-      document.getElementById("display").value = temp;
+      storeInput(value);
   } else if (value === "AC"){
       temp = '';
       inputs = [];
